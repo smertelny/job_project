@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<table>
+    <tr>
+        <th>IP</th>
+        <th>Status Code</th>
+    </tr>
+{% for log in logs %}
+    <tr>
+        <td>{{ log.getUserIp }}</td>
+        <td>{{ log.getStatusCode }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock body %}

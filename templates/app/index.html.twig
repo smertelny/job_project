@@ -1,6 +1,21 @@
 {% extends "base.html.twig" %}
 
+{% if data['result'] is defined %}
+    {% set data = data['result'] %}
+{% endif %}
+
+{% if yesturday_data['result'] is defined %}
+    {% set yesturday_data = yesturday_data['result'] %}
+{% endif %}
+
 {% block body %}
+<style>
+    table {
+        width: 50%;
+        float: left;
+    }
+</style>
+<a href="{{ path('log_index') }}">Logs</a>
 <div style="background: #b2d8b2; border-radius:20px; padding: 20px">
 <h2 style="color:green">Як користуватись сервісом?</h2>
 <p style="color:green">
@@ -28,6 +43,7 @@
         {% endfor %}
     {% else %}
     <table>
+        <caption>Your date</caption>
         <tr>
             <th>txt</th>
             <th>cc</th>
@@ -41,6 +57,23 @@
             </tr>
         {% endfor %}
     </table>
+    {% if yesturday_data is defined %}
+    <table>
+    <caption>Yesturday</caption>
+         <tr>
+            <th>txt</th>
+            <th>cc</th>
+            <th>rate</th>
+        </tr>
+        {% for i in yesturday_data %}
+            <tr>
+                <td>{{ i['txt'] }}</td>
+                <td>{{ i['cc'] }}</td>
+                <td>{{ i['rate'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
     {% endif %}
 {% endif %}
 {% endblock body %}
