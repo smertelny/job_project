@@ -19,6 +19,19 @@ class LogRepository extends ServiceEntityRepository
         parent::__construct($registry, Log::class);
     }
 
+    public function find20Logs($page)
+    {
+        $maxResults = 20;
+        $query = $this->createQueryBuilder('l')
+            ->orderBy('l.datetime', 'ASC')
+            ->setFirstResult($maxResults * ($page - 1))
+            ->setMaxResults($maxResults)
+            ->getQuery();
+        
+        return $query;
+
+    }
+
 //    /**
 //     * @return Log[] Returns an array of Log objects
 //     */

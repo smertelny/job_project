@@ -37,12 +37,13 @@ class DataController extends AbstractController
             );
         }
     }
-    private function save_logs($ip, $status_code) {
+    private function save_logs($ip, $status_code, $queryName) {
         $manager = $this->getDoctrine()->getManager();
 
         $log = new Log();
         $log->setUserIp($ip);
         $log->setStatusCode($status_code);
+        $log->setQueryName($queryName);
         
         $manager->persist($log);
         $manager->flush();
@@ -64,12 +65,13 @@ class DataController extends AbstractController
         return $ip;
     }
 
-    // /**
-    //  * @Route("", name="index")
-    //  */
-    // public function index() {
-    //     return $this->
-    // }
+    /**
+     * @Route("", name="index")
+     */
+    public function index(Request $request) {
+
+        return $this->render("app/index.html.twig", array());
+    }
 
     /**
      * @Route("fetch", name="fetch")
@@ -85,12 +87,14 @@ class DataController extends AbstractController
         $status_code = $result['status_code'];
         unset($result['status_code']);
         $ip = $this->getRealIpAddr($request->server);
-        $this->save_logs($ip, $status_code);
+        $queryName = $request->getRequestUri();
+        $this->save_logs($ip, $status_code, $queryName);
 
         $yesturday_data = $this->get_data($url . "&date=". date('Ymd', strtotime("-1 day")));
         $status_code = $yesturday_data['status_code'];
         unset($yesturday_data['status_code']);
-        $this->save_logs($ip, $status_code);
+        $queryName = $request->getRequestUri();
+        $this->save_logs($ip, $status_code, $queryName);
 
 
         return $this->render(

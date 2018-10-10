@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +26,17 @@ class Log
      * @ORM\Column(type="integer")
      */
     private $status_code;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $datetime;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $queryName;
 
     public function getId(): ?int
     {
@@ -51,6 +63,30 @@ class Log
     public function setStatusCode(int $status_code): self
     {
         $this->status_code = $status_code;
+
+        return $this;
+    }
+
+    public function getDatetime(): ?\DateTimeInterface
+    {
+        return $this->datetime;
+    }
+
+    // public function setDatetime(\DateTimeInterface $datetime): self
+    // {
+    //     $this->datetime = $datetime;
+
+    //     return $this;
+    // }
+
+    public function getQueryName(): ?string
+    {
+        return $this->queryName;
+    }
+
+    public function setQueryName(string $queryName): self
+    {
+        $this->queryName = $queryName;
 
         return $this;
     }

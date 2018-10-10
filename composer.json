@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "ext-pdo_sqlite": "*",
         "sensio/framework-extra-bundle": "^5.2",
+        "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "*",
         "symfony/console": "*",
