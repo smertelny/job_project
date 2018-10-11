@@ -23,7 +23,8 @@
 {% else %}
     {% if req['cur'] %}
         {% for i in data if i['cc']|lower == req['cur']|lower %}
-            {{ i['txt'] }} -- {{ i['cc'] }} -- {{ i['rate'] }}
+            {# {{ i['txt'] }} -- {{ i['cc'] }} -- {{ i['rate'] }} #}
+            {{ i|json_encode(constant('JSON_UNESCAPED_UNICODE')) }}
         {% else %}
             <p style="color:red;">Такої валюти не існує</p>
         {% endfor %}
