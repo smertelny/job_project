@@ -3,9 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/navbar.css') }}">
+        {% endblock %}
     </head>
     <body>
+        <ul class="navbar">
+            <li><a href="{{ path('index') }}">Main</a></li>
+            <li><a href="{{ path('fetch') }}">Fetch data</a></li>
+            <li><a href="{{ path('log_index') }}">Logs</a></li>
+        </ul>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

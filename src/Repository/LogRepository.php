@@ -23,7 +23,7 @@ class LogRepository extends ServiceEntityRepository
     {
         $maxResults = 20;
         $query = $this->createQueryBuilder('l')
-            ->orderBy('l.datetime', 'ASC')
+            ->orderBy('l.datetime', 'DESC')
             ->setFirstResult($maxResults * ($page - 1))
             ->setMaxResults($maxResults)
             ->getQuery();

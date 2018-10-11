@@ -1,18 +1,12 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
 
-{% include "navbar.html.twig" %}
-<style>
-    table {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid black;
-        padding: 5px;
-    }
-</style>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/logs_index.css') }}" />
+{% endblock stylesheets %}
+
+{% block body %}
 
 <table>
     <tr>

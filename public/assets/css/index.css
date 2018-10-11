@@ -1,0 +1,10 @@
+.docs_text {
+    background: #b2d8b2;
+    border-radius:20px;
+    padding: 20px;
+}
+
+.docs_text h2,
+.docs_text p {
+    color: green;
+}

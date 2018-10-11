@@ -1,22 +1,26 @@
 {% extends "base.html.twig" %}
 
-{% block body %}
-{% include "navbar.html.twig" %}
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('assets/css/index.css') }}" />
+{% endblock stylesheets %}
 
-<div style="background: #b2d8b2; border-radius:20px; padding: 20px">
-<h2 style="color:green">Як користуватись сервісом?</h2>
-<p style="color:green">
-Для того, щоб фільтрувати по даті - запишіть після посилання ?date=дата,
-де дата - це дата, на яку ви хочете дізнатись курс валюти
-у форматі РРРР-ММ-ДД;
-</p>
-<p style="color:green">
-Для фільтрації по валюті - впишіть ?currency=ВАЛ, де ВАЛ - 
-це скорочений запис валют (шукайте всі доступні валюти нижче)
-</p>
-<p style="color:green">
-Запити можна об'єднувати за допомогою значка &
-Наприклад example.com?currency=usd&date=20181008
-</p>
+{% block body %}
+
+<div class="docs_text">
+  <h2>Як користуватись сервісом?</h2>
+  <p>
+    Для того, щоб фільтрувати по даті - запишіть після посилання ?date=дата,
+    де дата - це дата, на яку ви хочете дізнатись курс валюти
+    у форматі РРРР-ММ-ДД;
+  </p>
+  <p>
+    Для фільтрації по валюті - впишіть ?currency=ВАЛ, де ВАЛ - 
+    це скорочений запис валют (шукайте всі доступні валюти нижче)
+  </p>
+  <p>
+    Запити можна об'єднувати за допомогою значка &
+    Наприклад example.com?currency=usd&date=20181008
+  </p>
 </div>
 {% endblock body %}

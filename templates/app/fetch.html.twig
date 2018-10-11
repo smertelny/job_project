@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/fetch.css') }}">
+{% endblock stylesheets %}
+
 {% if data['result'] is defined %}
     {% set data = data['result'] %}
 {% endif %}
@@ -10,16 +15,11 @@
 
 {% block body %}
 
-{% include "navbar.html.twig" %}
-
 <style>
-    table {
-        width: 50%;
-        float: left;
-    }
+    
 </style>
 {% if data['error'] is defined %}
-    <p style= "color:red">Сталась помилка: {{ data['error'] }}</p>
+    <p class="error">Сталась помилка: {{ data['error'] }}</p>
 {% else %}
     {% if req['cur'] %}
         {% for i in data if i['cc']|lower == req['cur']|lower %}
