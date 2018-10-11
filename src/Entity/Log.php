@@ -38,6 +38,11 @@ class Log
      */
     private $queryName;
 
+    /**
+     * @ORM\Column(type="string", length=255, options={"default": "Undefined"})
+     */
+    private $foreign_query_name;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Log
     public function setQueryName(string $queryName): self
     {
         $this->queryName = $queryName;
+
+        return $this;
+    }
+
+    public function getForeignQueryName(): ?string
+    {
+        return $this->foreign_query_name;
+    }
+
+    public function setForeignQueryName(string $foreign_query_name): self
+    {
+        $this->foreign_query_name = $foreign_query_name;
 
         return $this;
     }

@@ -13,6 +13,7 @@
         <th>IP</th>
         <th>Datetime</th>
         <th>API NBU Status Code</th>
+        <th>NBU Query</th>
         <th>Query</th>
     </tr>
 {% for log in logs %}
@@ -20,6 +21,7 @@
         <td>{{ log.getUserIp }}</td>
         <td>{{ log.getDatetime|date("Y-m-d H-i-s") }}</td>
         <td>{{ log.getStatusCode }}</td>
+        <td>{{ log.getForeignQueryName }}</td>
         <td>{{ log.getQueryName }}</td>
     </tr>
 {% endfor %}
