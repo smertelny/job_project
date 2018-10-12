@@ -20,7 +20,7 @@
   </p>
   <p>
     Запити можна об'єднувати за допомогою значка &
-    Наприклад example.com?currency=usd&date=20181008
+    Наприклад <a href="{{ app.request.getSchemeAndHttpHost() }}/fetch/?currency=usd&date=20181008">{{ app.request.getSchemeAndHttpHost() }}/fetch/?currency=usd&date=20181008</a>
   </p>
 </div>
 {% endblock body %}
