@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -83,6 +85,9 @@ class DataController extends AbstractController
         if ($request->query->get('date')) {
             $url = $url . "&date=" . $request->query->get('date');
         }
+        if ($request->query->get('currency')) {
+            $url = $url . "&valcode=" . $request->query->get('currency');
+        }
 
         $result = $this->get_data($url);
         $status_code = $result['status_code'];
@@ -90,6 +95,12 @@ class DataController extends AbstractController
         $ip = $this->getRealIpAddr($request->server);
         $queryName = $request->getRequestUri();
         $this->save_logs($ip, $status_code, $queryName, $url);
+
+        if ($request->headers->get('accept') === "application/json") {
+            $res = count($result['result']) > 1 ? $result['result'] : $result['result'][0]; 
+            $response = new JsonResponse($res);
+            return $response;
+        }
 
         $url = $url . "&date=". date('Ymd', strtotime("-1 day"));
         $yesturday_data = $this->get_data($url);
