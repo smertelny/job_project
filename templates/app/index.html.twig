@@ -19,8 +19,13 @@
     це скорочений запис валют (шукайте всі доступні валюти нижче)
   </p>
   <p>
+    Для того, щоб отримати "чистий" JSON - додайте ?format=json або додайте заголовок "Accept: application/json" 
+  </p>
+  <p>
     Запити можна об'єднувати за допомогою значка &
     Наприклад <a href="{{ app.request.getSchemeAndHttpHost() }}/fetch/?currency=usd&date=20181008">{{ app.request.getSchemeAndHttpHost() }}/fetch/?currency=usd&date=20181008</a>
+    <br />
+    Або <a href="{{ app.request.getSchemeAndHttpHost() }}/fetch/?currency=usd&date=20181008&format=json">{{ app.request.getSchemeAndHttpHost() }}/fetch/?currency=usd&date=20181008&format=json</a>
   </p>
 </div>
 {% endblock body %}

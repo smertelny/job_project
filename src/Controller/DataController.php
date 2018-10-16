@@ -96,7 +96,7 @@ class DataController extends AbstractController
         $queryName = $request->getRequestUri();
         $this->save_logs($ip, $status_code, $queryName, $url);
 
-        if ($request->headers->get('accept') === "application/json") {
+        if ($request->headers->get('accept') === "application/json" || $request->query->get('format') === 'json') {
             $res = count($result['result']) > 1 ? $result['result'] : $result['result'][0]; 
             $response = new JsonResponse($res);
             return $response;
