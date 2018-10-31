@@ -77,9 +77,9 @@ class DataController extends AbstractController
     }
 
     /**
-     * @Route("fetch", name="fetch")
+     * @Route("fetch.{_format}", defaults={"_format": "html"}, requirements={"_format": "html|json"}, name="fetch")
      */
-    public function fetcher(Request $request) 
+    public function fetcher(Request $request, $_format) 
     {
         $url = 'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json';
         if ($request->query->get('date')) {
@@ -96,7 +96,7 @@ class DataController extends AbstractController
         $queryName = $request->getRequestUri();
         $this->save_logs($ip, $status_code, $queryName, $url);
 
-        if ($request->headers->get('accept') === "application/json" || $request->query->get('format') === 'json') {
+        if ($request->headers->get('accept') === "application/json" || $request->query->get('format') === 'json' || $_format === "json") {
             $res = count($result['result']) > 1 ? $result['result'] : $result['result'][0]; 
             $response = new JsonResponse($res);
             return $response;
