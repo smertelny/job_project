@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,7 +48,6 @@ class DataController extends AbstractController
         $log->setForeignQueryName($foreignQuery);
         
         $manager->persist($log);
-        $manager->flush();
     }
 
     private function getRealIpAddr($server) {
@@ -72,7 +70,6 @@ class DataController extends AbstractController
      * @Route("", name="index")
      */
     public function index(Request $request) {
-
         return $this->render("app/index.html.twig", array());
     }
 
@@ -88,6 +85,7 @@ class DataController extends AbstractController
         if ($request->query->get('currency')) {
             $url = $url . "&valcode=" . $request->query->get('currency');
         }
+        
 
         $result = $this->get_data($url);
         $status_code = $result['status_code'];
@@ -108,6 +106,8 @@ class DataController extends AbstractController
         unset($yesturday_data['status_code']);
         $queryName = $request->getRequestUri();
         $this->save_logs($ip, $status_code, $queryName, $url);
+
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->render(
             'app/fetch.html.twig',
